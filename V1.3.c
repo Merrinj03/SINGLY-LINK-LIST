@@ -21,22 +21,29 @@ void main()
 				head=(struct node*)malloc(sizeof(struct node));
 				head->data=entry;
 				pos=head;
-				tail=head;
-				c=1;}
+				tail=head;}
 			else{
 				tail->next=(struct node*)malloc(sizeof(struct node));
 				tail=tail->next;
-				tail->data=entry;
-				c++;}
+				tail->data=entry;}
 				break;}
 		case 2:{
 			pos=head;
-			printf("\nElements are: ");
-			while(pos!=NULL){
-				printf("\t%d",pos->data);
-				pos=pos->next;}
-			break;}
+			if(pos==NULL){
+				printf("nothing to display\n");
+				break;}
+			else{
+				printf("Elements are: ");
+				while(pos!=NULL){
+					printf("\t%d",pos->data);
+					pos=pos->next;}
+			break;}}
 		case 3:{
+			c=0;
+			pos=head;
+			while(pos!=NULL){
+				pos=pos->next;
+				c++;}
 			printf("The number of elements are: %d",c);
 			break;}
 		case 4:{
@@ -55,9 +62,20 @@ void main()
 				break;}
 		case 5:{
 			struct node *temp=head;
+			if(head==NULL){
+				printf("Empty");
+				break;}
 			printf("\nEnter position of data: ");
 			scanf("%d",&entry);
-			if(entry==0){
+			c=0;
+			pos=head;
+			while(pos!=NULL){
+				pos=pos->next;
+				c++;}
+			if(entry>c){
+				printf("Out of range");
+				break;}
+			else if(entry==0){
 				head=head->next;
 				temp->next=NULL;
 				free(temp);
@@ -70,11 +88,12 @@ void main()
 					del->next=NULL;
 					free(del);
 					printf("\nDELETED!\n");}
-				break;}
+					break;}
 			
 		case 6:{
 			printf("\nGoodbye");
 			exit(0);}
+		default:
+			printf("Wrong input\n");}
 		}
 	}
-}
